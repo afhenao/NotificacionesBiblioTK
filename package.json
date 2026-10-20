@@ -1,0 +1,22 @@
+{
+  "name": "notificacionesbibliotk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Notificaciones en tiempo real de BiblioTK (Socket.IO + Redis)",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/app.js",
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "@socket.io/redis-adapter": "8.3.0",
+    "cookie": "2.0.1",
+    "cors": "2.8.6",
+    "dotenv": "17.4.2",
+    "express": "5.2.1",
+    "mysql2": "3.24.4",
+    "qrcode": "1.5.4",
+    "redis": "6.3.0",
+    "socket.io": "4.8.4"
+  }
+}
