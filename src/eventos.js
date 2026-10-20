@@ -46,6 +46,15 @@ export const catalogo = {
       "demo.superadmin": (d) => `Se eliminó una cuenta de ${cuenta(d)}.`,
     },
   },
+  "usuario.rolCambiado": {
+    categoria: "usuarios",
+    titulo: "Rol actualizado",
+    mensajes: {
+      superadmin: (d) => `${nombre(d)} ahora es ${cuenta(d)} (antes ${cuenta({ rol: d.rolAnterior })}).`,
+      dueno: (d) => `Tu cuenta ahora es de ${cuenta(d)}: te llevamos a la app que te corresponde.`,
+      "demo.superadmin": (d) => `Una cuenta pasó de ${cuenta({ rol: d.rolAnterior })} a ${cuenta(d)}.`,
+    },
+  },
   "perfil.actualizado": {
     categoria: "usuarios",
     titulo: "Perfil actualizado",

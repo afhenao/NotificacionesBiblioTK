@@ -37,6 +37,7 @@ Los backends llaman a `POST /interno/eventos` con `{ tipo, datos }` **después d
 |---|---|---|---|---|---|
 | `usuario.registrado` | Registro | ✔ | | | superadmin |
 | `usuario.eliminado` | Perfil | ✔ | | | superadmin (además se cortan los sockets de la cuenta y se borra su historial) |
+| `usuario.rolCambiado` | Dashboard (superadmin) | ✔ | | ✔ | superadmin (además se cortan los sockets de la cuenta, medio segundo después, para que su app la lleve a la del rol nuevo) |
 | `perfil.actualizado` | Perfil | ✔ | | ✔ | superadmin; usuario solo si el dueño es lector |
 | `material.creado` / `actualizado` / `eliminado` | Materiales | | ✔ | | admin |
 | `prestamo.creado` | Préstamos | | ✔ | ✔ | admin, usuario |

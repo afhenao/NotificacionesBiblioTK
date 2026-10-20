@@ -92,6 +92,12 @@ export async function publicar(io, tipo, datos) {
     await borrarHistorial(`usuario:${datos.usuarioId}`);
   }
 
+  if (tipo === "usuario.rolCambiado" && datos.usuarioId) {
+    // Sus salas dependían del rol viejo: se cortan sus sockets (un instante después, para que le
+    // llegue el aviso) y su app revalida la sesión y la lleva a la app del rol nuevo
+    setTimeout(() => io.in(`usuario:${datos.usuarioId}`).disconnectSockets(true), 500);
+  }
+
   return entregas[0]?.notificacion.id ?? null;
 }
 
