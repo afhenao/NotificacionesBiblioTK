@@ -4,6 +4,7 @@ Parte del sistema BiblioTK (ver `../CLAUDE.md`). Recibe los eventos que publican
 
 - **Puerto:** 3006 (`PORT` en `.env`). Prefijo `/NotificacionesBiblioTK`; el socket va en `/NotificacionesBiblioTK/socket.io`.
 - **Arranque:** `npm run dev` (`node --watch src/app.js`). Necesita la BD (para validar la cookie contra `sesiones`) y **Redis**: `docker compose -f ../InfraBiblioTK/docker-compose.yml up -d redis`. Mientras Redis no responde, el servicio espera reintentando.
+- **Docker:** `Dockerfile` (node:24-alpine, solo dependencias de producción, usuario `node`, sin `.env`: la configuración llega por variables de entorno); en Docker/Kubernetes hay que dar `MOVIL_URL` (el contenedor no ve la IP del computador). Se orquesta desde `../InfraBiblioTK` (Compose y Kubernetes).
 - **Dependencias clave:** express 5, socket.io 4, @socket.io/redis-adapter, redis (node-redis), mysql2, cookie 2 (`parseCookie`), qrcode, cors, dotenv. Versiones fijas, sin `^`.
 - **Variables (`.env`, ver `.env.example`):** `PORT=3006`, `DB_*` (las mismas de los demás backends), `REDIS_URL` (por defecto `redis://localhost:6379`), `ALLOWED_ORIGIN_*` (si no hay, 5172–5175), y opcionales `NOTIFICACIONES_CLAVE`, `MOVIL_URL`, `MOVIL_PUERTO` (5177) y `ZONA_HORARIA` (`America/Bogota`).
 
