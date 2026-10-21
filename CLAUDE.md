@@ -40,7 +40,9 @@ Los backends llaman a `POST /interno/eventos` con `{ tipo, datos }` **después d
 | `usuario.rolCambiado` | Dashboard (superadmin) | ✔ | | ✔ | superadmin (además se cortan los sockets de la cuenta, medio segundo después, para que su app la lleve a la del rol nuevo) |
 | `perfil.actualizado` | Perfil | ✔ | | ✔ | superadmin; usuario solo si el dueño es lector |
 | `material.creado` / `actualizado` / `eliminado` | Materiales | | ✔ | | admin |
-| `prestamo.creado` | Préstamos | | ✔ | ✔ | admin, usuario |
+| `prestamo.solicitado` | Préstamos (el lector pide) | | ✔ | ✔ | admin, usuario |
+| `prestamo.aprobado` | Préstamos (bibliotecario; al lector le dice dónde recogerlo) | | ✔ | ✔ | admin, usuario |
+| `prestamo.rechazado` | Préstamos (bibliotecario, con motivo opcional) | | ✔ | ✔ | admin, usuario |
 | `prestamo.cancelado` | Préstamos (lector o bibliotecario) | | ✔ | ✔ | admin, usuario |
 | `prestamo.devuelto` | Préstamos | | ✔ | ✔ | admin, usuario |
 | `prestamo.vencido` | Préstamos (al marcar vencidos) | | ✔ | ✔ | admin, usuario |

@@ -90,15 +90,37 @@ export const catalogo = {
       "demo.admin": (d) => `Se eliminó ${titulo(d)} del catálogo.`,
     },
   },
-  "prestamo.creado": {
+  "prestamo.solicitado": {
     categoria: "prestamos",
-    titulo: "Préstamo nuevo",
+    titulo: "Solicitud de préstamo",
     mensajes: {
-      admin: (d) => `${nombre(d)} pidió ${titulo(d)}.`,
+      admin: (d) => `${nombre(d)} solicitó ${titulo(d)}: apruébala o recházala en Préstamos.`,
       dueno: (d) =>
-        `Pediste ${titulo(d)}. Recógelo en ${d.lugarRecogida} y devuélvelo antes del ${fecha(d.fechaDevolucionEsperada)}.`,
-      "demo.admin": (d) => `Un lector pidió ${titulo(d)}.`,
-      "demo.usuario": (d) => `Préstamo registrado: ${titulo(d)}. Recógelo en ${d.lugarRecogida}.`,
+        `Solicitaste ${titulo(d)}. Te avisamos cuando un bibliotecario la apruebe para que lo recojas.`,
+      "demo.admin": (d) => `Un lector solicitó ${titulo(d)}.`,
+      "demo.usuario": (d) => `Solicitud enviada: ${titulo(d)}. Espera la aprobación del bibliotecario.`,
+    },
+  },
+  "prestamo.aprobado": {
+    categoria: "prestamos",
+    titulo: "Préstamo aprobado",
+    mensajes: {
+      admin: (d) => `Se aprobó el préstamo de ${titulo(d)} a ${nombre(d)}.`,
+      dueno: (d) =>
+        `Aprobaron tu préstamo de ${titulo(d)}. Recógelo en ${d.lugarRecogida} y devuélvelo antes del ${fecha(d.fechaDevolucionEsperada)}.`,
+      "demo.admin": (d) => `Se aprobó un préstamo de ${titulo(d)}.`,
+      "demo.usuario": (d) => `Préstamo aprobado: ${titulo(d)}. Recógelo en ${d.lugarRecogida}.`,
+    },
+  },
+  "prestamo.rechazado": {
+    categoria: "prestamos",
+    titulo: "Solicitud rechazada",
+    mensajes: {
+      admin: (d) => `Se rechazó la solicitud de ${titulo(d)} de ${nombre(d)}.`,
+      dueno: (d) =>
+        `La biblioteca rechazó tu solicitud de ${titulo(d)}.${d.motivo ? ` Motivo: ${d.motivo}` : ""}`,
+      "demo.admin": (d) => `Se rechazó una solicitud de ${titulo(d)}.`,
+      "demo.usuario": (d) => `La biblioteca rechazó la solicitud de ${titulo(d)}.`,
     },
   },
   "prestamo.cancelado": {
@@ -108,11 +130,11 @@ export const catalogo = {
       admin: (d) =>
         d.canceladoPor === "admin"
           ? `Se canceló el préstamo de ${titulo(d)} a ${nombre(d)}.`
-          : `${nombre(d)} canceló su préstamo de ${titulo(d)}.`,
+          : `${nombre(d)} canceló su ${d.solicitud ? "solicitud" : "préstamo"} de ${titulo(d)}.`,
       dueno: (d) =>
         d.canceladoPor === "admin"
           ? `La biblioteca canceló tu préstamo de ${titulo(d)}.${d.motivo ? ` Motivo: ${d.motivo}` : ""}`
-          : `Cancelaste tu préstamo de ${titulo(d)}.`,
+          : `Cancelaste tu ${d.solicitud ? "solicitud" : "préstamo"} de ${titulo(d)}.`,
       "demo.admin": (d) => `Se canceló un préstamo de ${titulo(d)}.`,
       "demo.usuario": (d) =>
         d.canceladoPor === "admin"
