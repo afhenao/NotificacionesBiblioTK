@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import os from "node:os";
 import QRCode from "qrcode";
 
@@ -23,9 +24,22 @@ function ipEnLaRed() {
   return (wifi ?? candidatas[0])?.ip ?? "localhost";
 }
 
-// MOVIL_URL manda cuando existe (en Docker/Kubernetes el contenedor no ve la IP del computador)
+// MOVIL_URL_ARCHIVO: archivo que InfraBiblioTK/scripts/ip-celular.ps1 reescribe cada vez que cambia la
+// red. Se lee en cada petición, así que el QR sigue a la red sin reiniciar el contenedor
+function urlDelArchivo() {
+  const archivo = process.env.MOVIL_URL_ARCHIVO?.trim();
+  if (!archivo) return null;
+
+  try {
+    return fs.readFileSync(archivo, "utf8").trim() || null;
+  } catch {
+    return null;
+  }
+}
+
+// En Docker/Kubernetes el contenedor no ve la IP del computador: manda el archivo y luego MOVIL_URL
 export function urlMovil() {
-  const configurada = process.env.MOVIL_URL?.trim();
+  const configurada = urlDelArchivo() ?? process.env.MOVIL_URL?.trim();
 
   if (configurada) return configurada;
 
